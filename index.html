@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega ofertas online</title>
+    <!-- my app -->
+    <script src="./app/index.js" defer></script>
+    <!-- libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Centrar el título */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Disposición de la página usando Flexbox */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        /* Estilo para la lista de productos */
+        .products {
+            flex: 2;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        /* Estilo para el carrito en el nav */
+        nav {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .cart {
+            width: 100%;
+        }
+
+        .product, .cart-item {
+            margin-bottom: 10px;
+        }
+
+        img {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tienda Online</h1>
+
+    <!-- Usamos un contenedor para organizar el layout -->
+    <div class="container">
+        <!-- Sección de productos -->
+        <div class="products">
+            <h2>Productos</h2>
+            <div id="product-list">
+                <!-- Productos serán agregados dinámicamente con JavaScript -->
+            </div>
+        </div>
+
+        <!-- Navegación que contiene el carrito -->
+        <nav>
+            <div class="cart">
+                <h2>Carrito de Compras</h2>
+                <div id="cart-items">
+                    <!-- Carrito vacío al inicio -->
+                </div>
+                <p>Total: $<span id="cart-total">0.00</span></p>
+            </div>
+        </nav>
+    </div>
+
+</body>
+</html>
