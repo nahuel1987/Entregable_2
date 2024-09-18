@@ -3,87 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mega ofertas online</title>
+    <title>TU TIENDA DE BEBIDAS ONLINE</title>
     <!-- my app -->
     <script src="./app/index.js" defer></script>
     <!-- libraries -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Estilos generales */
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            background-image: url('ruta/de/tu/imagen.jpg'); /* Reemplaza con la ruta de tu imagen */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
         }
 
-        /* Centrar el título */
-        h1 {
+        /* Estilos para el encabezado */
+        header {
+            background-color: #FF4500;
+            padding: 20px;
             text-align: center;
-            margin-top: 20px;
         }
 
-        /* Disposición de la página usando Flexbox */
-        .container {
-            display: flex;
-            justify-content: space-between;
+        header h1 {
+            margin: 0;
+            color: #fff;
+            font-size: 36px;
+        }
+
+        /* Ajustar el margen superior del contenido principal para que no se oculte detrás del header fijo */
+        main {
             padding: 20px;
+            margin-top: 80px; /* Ajusta este valor según la altura del header */
         }
 
-        /* Estilo para la lista de productos */
-        .products {
-            flex: 2;
-            padding: 20px;
-            border: 1px solid #ccc;
+        /* Estilos para el producto */
+        .product {
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Estilo para el carrito en el nav */
-        nav {
-            flex: 1;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
+        .cocktail-img {
+            width: 150px;
+            height: auto;
+            border-radius: 8px;
         }
 
-        .cart {
+        /* Carrito de compras a la derecha */
+        #cart {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
             width: 100%;
+            border-collapse: collapse;
+            background-color: transparent;
         }
 
-        .product, .cart-item {
-            margin-bottom: 10px;
+        table, th, td {
+            border: 1px solid #ddd;
         }
 
-        img {
-            display: block;
-            margin-bottom: 10px;
+        th, td {
+            padding: 10px;
+            text-align: center;
         }
+
+        th {
+            background-color: #FF4500;
+            color: white;
+        }
+
+        td {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .total {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        button {
+            background-color: #FF6347;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #FF4500;
+        }
+
+        /* Estilos específicos para el botón de eliminar */
+        .remove-button {
+            background-color: #dc3545; /* Rojo para indicar eliminación */
+        }
+
+        .remove-button:hover {
+            background-color: #c82333;
+        }
+
+        .btn-clear {
+            margin-bottom: 10px;
+            background-color: #FF4500;
+        }
+
+        /* Estilos para el formulario de compra */
+        #checkout {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos responsive para pantallas pequeñas */
+        @media (max-width: 768px) {
+            #cart {
+                position: static;
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+ 
     </style>
-</head>
+</head>    
 <body>
+    <!-- Encabezado -->
+    <header>
+        <h1>Tienda de Cócteles</h1>
+    </header>
 
-    <h1>Tienda Online</h1>
+    <main>
+        <!-- Aquí se cargarán los productos obtenidos del servidor -->
+        <div id="product-list"></div>
 
-    <!-- Usamos un contenedor para organizar el layout -->
-    <div class="container">
-        <!-- Sección de productos -->
-        <div class="products">
-            <h2>Productos</h2>
-            <div id="product-list">
-                <!-- Productos serán agregados dinámicamente con JavaScript -->
-            </div>
-        </div>
-
-        <!-- Navegación que contiene el carrito -->
-        <nav>
-            <div class="cart">
-                <h2>Carrito de Compras</h2>
-                <div id="cart-items">
-                    <!-- Carrito vacío al inicio -->
-                </div>
-                <p>Total: $<span id="cart-total">0.00</span></p>
-            </div>
-        </nav>
+      <!-- Formulario de cliente -->
+      <div id="checkout">
+        <h2>Información del Cliente</h2>
+        <form id="checkout-form">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <button type="submit">Finalizar Compra</button>
+        </form>
     </div>
+</main>
 
+<!-- Carrito visible en todo momento -->
+<div id="cart">
+    <h2>Carrito de Compras</h2>
+    <button class="btn-clear" id="clear-cart">Vaciar Carrito</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items">
+            <!-- Aquí se agregarán los elementos del carrito -->
+        </tbody>
+    </table>
+    <p class="total">Total: $<span id="total-price">0</span></p>
+    <button id="purchase-button">Comprar</button> <!-- Botón de compra agregado -->
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
